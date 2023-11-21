@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        input, button {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cookie Example</h1>
+    
+    <label for="cookieInput">Enter a value for the cookie:</label>
+    <input type="text" id="cookieInput">
+    <button onclick="setCookie()">Set Cookie</button>
+
+    <p id="cookieValue">Cookie Value: <span id="displayCookie"></span></p>
+
+    <script>
+        function setCookie() {
+            var user = prompt("Please enter a value for the cookie:", "");
+            if (user != null && user !== "") {
+                document.cookie = "exampleCookie=" + user + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+                displayCookieValue();
+            }
+        }
+
+        function displayCookieValue() {
+            var allCookies = document.cookie;
+            var cookieArray = allCookies.split("; ");
+            for (var i = 0; i < cookieArray.length; i++) {
+                var cookiePair = cookieArray[i].split("=");
+                if (cookiePair[0] === "exampleCookie") {
+                    document.getElementById("displayCookie").textContent = cookiePair[1];
+                    break;
+                }
+            }
+        }
+
+        // Display cookie value on page load
+        window.onload = function () {
+            displayCookieValue();
+        };
+    </script>
+</body>
+</html>
+
+
